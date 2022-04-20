@@ -1,0 +1,94 @@
+{
+  "api": {
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg"
+    ],
+    "users": [
+      "Max",
+      "Alex",
+      "Mary",
+      "David",
+      "Miley"
+    ],
+    "emails": [
+      "snow@pisem.local",
+      "president@dka.local",
+      "fish@big.local",
+      "test@pisem.local",
+      "freedom@pisem.local"
+    ],
+    "avatars": [
+      "user.jpg",
+      "photo.jpg",
+      "awesome-avatar.jpg",
+      "roland.jpg",
+      "smit.jpg"
+    ],
+    "titles": [
+      "Canal View Prinsengracht",
+      "The house among olive",
+      "Perfectly located Castro",
+      "The Pondhouse - A Magical",
+      "Wood and stone place"
+    ],
+    "descriptions": [
+      "I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.",
+      "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+      "Design interior in most sympathetic area! Complitely renovated, well-equipped, cosy studio in idyllic, over 100 years old wooden house. Calm street, fast connection to center and airport.",
+      "Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.",
+      "Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance."
+    ],
+    "previewImages": [
+      "https://9.react.pages.academy/static/hotel/1.jpg",
+      "https://9.react.pages.academy/static/hotel/2.jpg",
+      "https://9.react.pages.academy/static/hotel/3.jpg",
+      "https://9.react.pages.academy/static/hotel/4.jpg",
+      "https://9.react.pages.academy/static/hotel/5.jpg"
+    ],
+    "prices": [
+      123,
+      10,
+      235,
+      33,
+      90
+    ],
+    "types": [
+      "room",
+      "hotel",
+      "house",
+      "apartment"
+    ],
+    "ratings": [
+      4.9,
+      3.5,
+      4.1,
+      4.7,
+      3.9
+    ],
+    "maxAdults": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "id": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "goods": [
+      "Laptop",
+      "Fridge",
+      "Breakfast",
+      "Towels",
+      "Baby seat"
+    ]
+  }
+}

@@ -14,6 +14,13 @@
       "David",
       "Miley"
     ],
+    "passwords": [
+      "Mx",
+      "Alx",
+      "Mry",
+      "Dvd",
+      "Mly"
+    ],
     "emails": [
       "snow@pisem.local",
       "president@dka.local",
@@ -49,39 +56,11 @@
       "https://9.react.pages.academy/static/hotel/4.jpg",
       "https://9.react.pages.academy/static/hotel/5.jpg"
     ],
-    "prices": [
-      123,
-      10,
-      235,
-      33,
-      90
-    ],
     "types": [
       "room",
       "hotel",
       "house",
       "apartment"
-    ],
-    "ratings": [
-      4.9,
-      3.5,
-      4.1,
-      4.7,
-      3.9
-    ],
-    "maxAdults": [
-      1,
-      2,
-      3,
-      4,
-      5
-    ],
-    "id": [
-      1,
-      2,
-      3,
-      4,
-      5
     ],
     "goods": [
       "Laptop",
@@ -89,6 +68,32 @@
       "Breakfast",
       "Towels",
       "Baby seat"
+    ],
+    "latitudes": [
+      "48.85661",
+      "50.938361",
+      "50.846557",
+      "50.846557",
+      "53.550341"
+    ],
+    "longitudes": [
+      "2.351499",
+      "6.959974",
+      "4.351697",
+      "4.895168",
+      "10.000654"
+    ],
+    "isFavorite": [
+      true,
+      false
+    ],
+    "isPremium": [
+      true,
+      false
+    ],
+    "isPro": [
+      true,
+      false
     ]
   }
 }

@@ -14,7 +14,6 @@ export type Offer = {
   images: string[];
   isFavorite: boolean;
   isPremium: boolean;
-  location: Location;
   maxAdults: number;
   previewImage: string;
   price: number;

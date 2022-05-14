@@ -13,6 +13,7 @@ export default class DatabaseService implements DatabaseInterface {
 
   public async connect(uri: string): Promise<void> {
     this.logger.info('Try to connect to MongoDB...');
+    console.log(uri);
     await mongoose.connect(uri);
     this.logger.info('Database connection established.');
   }

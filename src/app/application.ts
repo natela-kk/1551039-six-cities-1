@@ -25,7 +25,6 @@ export default class Application {
       this.config.get('DB_PORT'),
       this.config.get('DB_NAME'),
     );
-    console.log(uri);
     this.logger.info(uri);
     await this.databaseClient.connect(uri);
   }

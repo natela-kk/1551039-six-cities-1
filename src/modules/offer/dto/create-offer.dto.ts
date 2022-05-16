@@ -1,5 +1,5 @@
-import { Location } from '../../../src/types/city.type.js';
-import { Host } from '../../../src/types/host.type.js';
+import { Location } from '../../../types/city.type.js';
+import { Host } from '../../../types/host.type.js';
 
 export default class CreateOfferDto {
   public userId!: string;

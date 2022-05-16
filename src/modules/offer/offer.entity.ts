@@ -1,6 +1,6 @@
 import typegoose, { getModelForClass, Ref } from '@typegoose/typegoose';
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses.js';
-import { OfferType } from '../../src/types/offer.type.enum.js';
+import { OfferType } from '../../types/offer.type.enum.js';
 import { UserEntity } from '../user/user.entity.js';
 
 const { prop, modelOptions} = typegoose;

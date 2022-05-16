@@ -1,5 +1,5 @@
-import { UserServiceInterface } from '../../modules/user/user-service.interface.js';
-import UserService from '../../modules/user/user.service.js';
+import { UserServiceInterface } from '../modules/user/user-service.interface.js';
+import UserService from '../modules/user/user.service.js';
 import { DatabaseInterface } from '../common/database-client/database.interface.js';
 import TSVFileReader from '../common/file-reader/tsv-file-reader.js';
 import ConsoleLoggerService from '../common/logger/console.logger.service.js';
@@ -7,12 +7,12 @@ import { LoggerInterface } from '../common/logger/logger.interface.js';
 import { createOffer, getErrorMessage } from '../utils/common.js';
 import { getURI } from '../utils/db.js';
 import { CliCommandInterface } from './cli-command.interface.js';
-import { OfferServiceInterface } from '../../modules/offer/offer-service.interface';
-import { OfferModel } from '../../modules/offer/offer.entity.js';
-import { UserModel } from '../../modules/user/user.entity.js';
+import { OfferServiceInterface } from '../modules/offer/offer-service.interface';
+import { OfferModel } from '../modules/offer/offer.entity.js';
+import { UserModel } from '../modules/user/user.entity.js';
 import DatabaseService from '../common/database-client/database.servise.js';
 import { Offer } from '../types/offer.type.js';
-import OfferService from '../../modules/offer/offer.service.js';
+import OfferService from '../modules/offer/offer.service.js';
 
 const DEFAULT_DB_PORT = 27017;
 const DEFAULT_USER_PASSWORD = 'test';

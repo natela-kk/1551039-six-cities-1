@@ -1,0 +1,377 @@
+openapi: 3.0.1
+info:
+  title: REST API сервер для проекта «Шесть городов».
+  description: |-
+    * Список ресурсов и маршрутов сервера «Шесть городов».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+tags:
+  - name: offers
+    description: Действия с объявлениями.
+  - name: offer
+    description: Действия с объявлением.
+  - name: comment
+    description: Действия с комментариями.
+  - name: user
+    description: Действия с пользователем.
+paths:
+  /offers/:
+    post:
+      tags:
+        - offer
+      summary: Добавить новое объявление
+      description: Добавляет новое объявление.
+      operationId: createOffer
+      requestBody:
+        description: Объект с новым объявлением
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Createoffer'
+        required: true
+      responses:
+        '201':
+          description: Новое объявление
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+        '400':
+          description: Ошибка тела запроса
+          content: {}
+        '404':
+          description: Объявление не найдено
+          content: {}
+  /offers/{offerId}:
+    get:
+      tags:
+        - offer
+      summary: Получить детальную информацию по объявлению
+      description: Возвращает объявление с идентификатором `offerId`.
+      operationId: getOfferById
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: string
+            example: f17c1
+      responses:
+        '200':
+          description: Объект объявления
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '404':
+          description: Объявление не найдено
+          content: {}
+    put:
+      tags:
+        - offer
+      summary: Редактировать объявление
+      description: Обновляет объявление с идентификатором `offerId`.
+      operationId: updateOfferById
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: string
+            example: f17c1
+      requestBody:
+        description: Объект с изменённым объявлением
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Createoffer'
+        required: true
+      responses:
+        '200':
+          description: Объект объявления
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '404':
+          description: Объявление не найдено
+          content: {}
+  delete:
+      tags:
+        - offer
+      summary: Удалить объявление
+      description: Удаляет объявление с идентификатором `offerId`.
+      operationId: deleteOfferById
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: string
+            example: f17c1
+      responses:
+        '200':
+          description: Объявление удалено
+          content: {}
+        '404':
+          description: Объявление не найдено
+          content: {}
+  /offers:
+    get:
+      tags:
+        - offers
+      summary: Получить список предложений по аренде
+      description: Возвращает массив предложений. Каждое предложение описано в виде объекта.
+      operationId: getOffers
+      responses:
+        '200':
+          description: Массив предложений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+  /favorite:
+    get:
+      tags:
+        - favorite
+      summary: Получить список избранных предложений
+      description: Возвращает массив предложений, добавленных в избранное.
+      operationId: getFavorites
+      responses:
+        '200':
+          description: Массив предложений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+  /favorite/offerId/{status}:
+    post:
+      tags:
+        - favorite
+      summary: Изменить статус избранного у предложение
+      description: Возвращает предложение с идентификатором offerId с актуальным состоянием поля isFavorite
+      operationId: getFavorites
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: number
+            example: 1
+        - name: status
+          in: path
+          description: Статус избранного предложения. Может быть 1 или 0, где 1 добавляет предложение в избранное, а 0 удаляет
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        '200':
+          description: Массив предложений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+  /offers/{offerId}/comments:
+    get:
+      tags:
+        - comment
+      summary: Получить список комментариев
+      description: Возвращает список комментариев для объявления с идентификатором `offerId`.
+      operationId: getComment
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: string
+            example: f17c1
+      responses:
+        '200':
+          description: Массив комментариев
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '404':
+          description: Объявление не найдено
+          content: {}
+    post:
+      tags:
+        - comment
+      summary: Добавить новый комментарий
+      description: Добавляет новый комментарий для объявления с идентификатором `offerId`.
+      operationId: postComment
+      parameters:
+        - name: offerId
+          in: path
+          description: Уникальный идентификатор объявления
+          required: true
+          schema:
+            type: string
+            example: f17c1
+      requestBody:
+        description: Объект с новым комментарием
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComment'
+        required: true
+      responses:
+        '201':
+          description: Новый комментарий
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Ошибка тела запроса
+          content: {}
+        '404':
+          description: Объявление не найдено
+          content: {}
+  /users/register:
+    post:
+      tags:
+        - user
+      summary: Создать нового пользователя
+      description: Создает нового пользователя.
+      operationId: registerUser
+      requestBody:
+        description: Объект, содержащий данные пользователя.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+        required: true
+      responses:
+        '200':
+          description: Статус авторизации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationInfo'
+        '400':
+          description: Ошибка тела запроса
+          content: {}
+        '409':
+          description: Пользователь с таким email существует
+          content: {}
+components:
+  schemas:
+    Createoffer:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Atmospheric studio in the historical center
+        description:
+          type: string
+          example: The studio is a designer renovation and the kitchen area is rented for a period of 1 day.
+        postDate:
+          type: string
+          example: 2021-12-12T21:55:28.147Z
+        image:
+          type: string
+          example: https://{url}/static/offer/studio.jpg
+        type:
+          type: string
+          enum:
+            - Room
+            - Hotel
+            - House
+            - Apartment
+        price:
+          type: integer
+          format: int32
+          example: 500
+        commentCount:
+          type: integer
+          format: int32
+          example: 10
+        user:
+          $ref: '#/components/schemas/User'
+    Offer:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              example: f17c1
+            commentCount:
+              type: integer
+              format: int32
+              example: 5
+        - $ref: '#/components/schemas/Createoffer'
+    CreateComment:
+      type: object
+      properties:
+        text:
+          type: string
+          example: Amazing apartment.
+        user:
+          $ref: '#/components/schemas/User'
+    Comment:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              example: eb0af
+        - $ref: '#/components/schemas/CreateComment'
+    CreateUser:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Oliver
+        surname:
+          type: string
+          example: Conner
+        email:
+          type: string
+          example: Oliver.conner@gmail.com
+        avatar:
+          type: string
+          example: https://{url}/static/avatar/1.jpg
+    User:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+              example: 2dd9c
+        - $ref: '#/components/schemas/CreateUser'
+    RegisterUser:
+      allOf:
+        - $ref: '#/components/schemas/CreateUser'
+        - type: object
+          properties:
+            password:
+              type: string
+              example: password
+    AuthorizationInfo:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            token:
+              type: string
+              example: T2xpdmVyLmNvbm5lckBnbWFpbC5jb20=

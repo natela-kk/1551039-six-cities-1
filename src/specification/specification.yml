@@ -102,7 +102,7 @@ paths:
         '404':
           description: Объявление не найдено
           content: {}
-  delete:
+    delete:
       tags:
         - offer
       summary: Удалить объявление
@@ -279,18 +279,84 @@ components:
     Createoffer:
       type: object
       properties:
-        title:
-          type: string
-          example: Atmospheric studio in the historical center
+        user:
+          $ref: '#/components/schemas/User'
+        bedrooms:
+          type: integer
+          format: int32
+          example: 5
+        city:
+          type: object
+          properties:
+            location:
+              type: object
+              properties:
+                latitude:
+                  type: integer
+                  format: int32
+                  example: 14.345
+                longitude:
+                  type: integer
+                  format: int32
+                  example: 344.354
+            name:
+              type: string
+              example: Paris
         description:
           type: string
           example: The studio is a designer renovation and the kitchen area is rented for a period of 1 day.
-        postDate:
+        goods:
+          type: array
+          example: TV, washing machine
+        host:
+          type: object
+          properties:
+            avatarUrl:
+              type: string
+              example: 'host.jpg'
+            isPro:
+              type: boolean
+              example: true
+            name:
+              type: string
+              example: Max
+            email:
+              type: string
+              example: max155@gmail.com
+            password:
+              type: string
+              example: fjksfq
+        id:
+          type: integer
+          format: int32
+          example: 10
+        images:
+          type: array
+          example: studio.jpg, room.jpg
+        isFavorite:
+          type: boolean
+          example: true
+        isPremium:
+          type: boolean
+          example: false
+        maxAdults:
+          type: integer
+          format: int32
+          example: 4
+        previewImage:
           type: string
-          example: 2021-12-12T21:55:28.147Z
-        image:
+          example: preview.jpg
+        price:
+          type: integer
+          format: int32
+          example: 500
+        rating:
+          type: integer
+          format: int32
+          example: 4.7
+        title:
           type: string
-          example: https://{url}/static/offer/studio.jpg
+          example: Atmospheric studio in the historical center
         type:
           type: string
           enum:
@@ -298,16 +364,13 @@ components:
             - Hotel
             - House
             - Apartment
-        price:
-          type: integer
-          format: int32
-          example: 500
+        date:
+          type: string
+          example: 2021-12-12T21:55:28.147Z
         commentCount:
           type: integer
           format: int32
           example: 10
-        user:
-          $ref: '#/components/schemas/User'
     Offer:
       allOf:
         - type: object

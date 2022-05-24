@@ -307,7 +307,9 @@ components:
           example: The studio is a designer renovation and the kitchen area is rented for a period of 1 day.
         goods:
           type: array
-          example: TV, washing machine
+          example: ["TV", "washing-machine"]
+          items:
+            type: string
         host:
           type: object
           properties:
@@ -332,7 +334,9 @@ components:
           example: 10
         images:
           type: array
-          example: studio.jpg, room.jpg
+          example: ["studio.jpg", "room.jpg"]
+          items:
+            type: string
         isFavorite:
           type: boolean
           example: true

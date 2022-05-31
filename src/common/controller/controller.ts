@@ -4,6 +4,7 @@ import { Response, Router } from 'express';
 import { LoggerInterface } from '../logger/logger.interface';
 import { RouteInterface } from '../../types/route.interface';
 import { ControllerInterface } from './controller.interface';
+import asyncHandler from 'express-async-handler';
 
 @injectable()
 export abstract class controller implements ControllerInterface {
@@ -18,7 +19,7 @@ export abstract class controller implements ControllerInterface {
   }
 
   public addRoute(route: RouteInterface) {
-    this._router[route.method](route.path, route.handler.bind(this));
+    this._router[route.method](route.path, asyncHandler(route.handler.bind(this)));
     this.logger.info(`Rote registered: ${route.method.toUpperCase()} ${route.path}`);
   }
 

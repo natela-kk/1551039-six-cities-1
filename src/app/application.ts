@@ -31,7 +31,7 @@ export default class Application {
     this.expressApp.use(express.json());
   }
 
-  public registerExpectionFilters() {
+  public registerExeptionFilters() {
     this.expressApp.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
   }
 
@@ -49,8 +49,10 @@ export default class Application {
     this.logger.info(uri);
     await this.databaseClient.connect(uri);
 
+    this.registerExeptionFilters();
+    this.registerRoutes();
     this.registerMiddlewares();
     this.expressApp.listen(this.config.get('PORT'));
-    this.logger.info(`Server started on http://localhost2:${this.config.get('PORT')}`);
+    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
   }
 }

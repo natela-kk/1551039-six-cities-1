@@ -14,6 +14,10 @@ import { ModelType} from '@typegoose/typegoose/lib/types.js';
 import OfferService from './modules/offer/offer.service.js';
 import { OfferServiceInterface } from './modules/offer/offer-service.interface.js';
 import { OfferEntity, OfferModel } from './modules/offer/offer.entity.js';
+import ExceptionFilter from './common/errors/exeption-filter.js';
+import { ExceptionFilterInterface } from './common/errors/exception-filter.interface.js';
+import UserController from './modules/user/user.controller.js';
+import { ControllerInterface } from './common/controller/controller.interface.js';
 
 const applicationContainer = new Container();
 applicationContainer.bind<Application>(Component.Application).to(Application).inSingletonScope();
@@ -24,7 +28,8 @@ applicationContainer.bind<UserServiceInterface>(Component.UserServiceInterface).
 applicationContainer.bind<ModelType<UserEntity>>(Component.UserModel).toConstantValue(UserModel);
 applicationContainer.bind<OfferServiceInterface>(Component.OfferServiceInterface).to(OfferService);
 applicationContainer.bind<ModelType<OfferEntity>>(Component.OfferModel).toConstantValue(OfferModel);
-
+applicationContainer.bind<ExceptionFilterInterface>(Component.ExeptionFilterInterface).to(ExceptionFilter).inSingletonScope();
+applicationContainer.bind<ControllerInterface>(Component.UserController).to(UserController).inSingletonScope();
 
 const application = applicationContainer.get<Application>(Component.Application);
 await application.init();

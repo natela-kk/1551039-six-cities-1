@@ -19,12 +19,14 @@ export default class Application {
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
     @inject(Component.ExeptionFilterInterface) private exeptionFilter: ExceptionFilterInterface,
     @inject(Component.UserController) private userController: UserController,
+    // @inject(Component.OfferController) private offerController: ControllerInterface
   ) {
     this.expressApp = express();
   }
 
   public registerRoutes() {
     this.expressApp.use('/users', this.userController.router);
+    // this.expressApp.use('/offers', this.offerController.router);
   }
 
   public registerMiddlewares() {

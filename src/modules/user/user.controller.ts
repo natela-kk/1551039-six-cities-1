@@ -66,4 +66,5 @@ export default class UserController extends Controller {
       'UserController',
     );
   }
+
 }

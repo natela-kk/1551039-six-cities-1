@@ -1,9 +1,8 @@
-import { Location } from './city.type';
-import { Host } from './host.type';
-import { User } from './user.type';
+import { Location } from './city.type.js';
+import { Host } from './host.type.js';
+import { OfferType } from './offer.type.enum.js';
 
 export type Offer = {
-  user: User;
   bedrooms: number;
   city: {
     location: Location;
@@ -21,7 +20,7 @@ export type Offer = {
   price: number;
   rating: number;
   title: string;
-  type: string;
+  type: OfferType;
   date: Date;
   commentsCount: number;
 };

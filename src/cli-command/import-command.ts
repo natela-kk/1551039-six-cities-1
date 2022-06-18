@@ -33,11 +33,12 @@ export default class ImportCommand implements CliCommandInterface {
     this.offerService = new OfferService(this.logger, OfferModel);
     this.userService = new UserService(this.logger, UserModel);
     this.databaseService = new DatabaseService(this.logger);
+    console.log('IMPOOOOOOOOOOOOOORT');
   }
 
   private async saveOffer(offer: Offer) {
     const user = await this.userService.findOrCreate({
-      ...offer.user,
+      ...offer.host,
       password: DEFAULT_USER_PASSWORD,
     }, this.salt);
 
@@ -61,6 +62,7 @@ export default class ImportCommand implements CliCommandInterface {
   public async execute(filename: string, login: string, password: string, host: string, dbname: string, salt: string): Promise<void> {
     const uri = getURI(login, password, host, DEFAULT_DB_PORT, dbname);
     this.salt = salt;
+    console.log('URI', uri);
 
     await this.databaseService.connect(uri);
 

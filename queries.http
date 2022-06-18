@@ -6,14 +6,14 @@ GET http://localhost:3123/api HTTP/1.1
 ## Регистрация пользователя
 
 POST http://localhost:4000/users/register HTTP/1.1
-Content-Type: : application/json
+Content-Type: application/json
 
 {
-  "email": "Max@gmail.com",
-  "avatarPath": "avatar.png",
-  "firstname": "Max",
-  "lastname": "Black",
-  "password": "shining"
+  "email": "ma679@gmail.com",
+  "avatarUrl": "avatar.png",
+  "name": "Max",
+  "password": "shining",
+  "isPro": false
 }
 
 ###
@@ -30,7 +30,7 @@ POST http://localhost:4000/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "Max@gmail.com",
+  "email": "snow@pisem.local",
   "password": "shining"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 # Объявления
 ## Объявление по идентификатору
 
-GET http://localhost:4000/offers/62711a50b0e24a624d49ffdc HTTP/1.1
+GET http://localhost:4000/offers/62ada874b050cd1d017b2020 HTTP/1.1
 
 ###
 
@@ -54,20 +54,66 @@ POST http://localhost:4000/offers HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "Билли Саммерс",
-  "description": "Новый детективный роман от короля ужасов.",
-  "postDate": "2022-05-12T11:56:37.573Z",
-  "image": "billy-summers.png",
-  "type": "Sell",
-  "price": 1408,
-  "categories": ["62823cb2c5a64ce9f1b50eba"],
-  "userId": "62823cb2c5a64ce9f1b50ec8"
+  "userId": "62ada874b050cd1d017b201e",
+  "bedrooms": 1,
+  "city": {
+    "location": {
+      "latitude": 48.8534,
+      "longitude": 2.3488
+    },
+    "name": "Paris"
+  },
+  "description": "The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath",
+  "goods": ["fridge", "TV"],
+  "host": {
+    "avatarUrl": "host.jpg",
+    "isPro": true,
+    "name": "Mary",
+    "email": "marysue@gmail.com",
+    "password": "mrewq"
+  },
+  "id": "62ada874b050cd1d017b202e",
+  "images": ["flat.jpg", "bath.jpg"],
+  "isFavorite": false,
+  "isPremium": false,
+  "maxAdults": 3,
+  "previewImage": "prew.jpg",
+  "price": 400,
+  "rating": 0,
+  "title": "Cozy apartment",
+  "type": "Apartment",
+  "date": "2011-12-19T15:28:46.493Z",
+  "commentsCount": 0
 }
 
 ###
 
 ## Удаление объявления
 
-DELETE http://localhost:4000/offers/62825028a75295825778ac80 HTTP/1.1
+DELETE http://localhost:4000/offers/62ada874b050cd1d017b2028 HTTP/1.1
 
 ###
+
+## Обновление объявления
+
+PATCH http://localhost:4000/offers/62ada874b050cd1d017b2025 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Cozy house",
+  "price": 1100
+}
+
+###
+
+## Отправка аватарки пользователю
+
+POST http://localhost:4000/users/62ada874b050cd1d017b201e/avatar HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="avatar"; filename="screen.png"
+Content-Type: image/png
+
+< /Users/antonov/tmp/screen.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

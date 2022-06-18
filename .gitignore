@@ -10,6 +10,7 @@
 coverage
 *.log
 *.env
+/upload/
 /mongodb
 
 /mocks/test-generate.tsv

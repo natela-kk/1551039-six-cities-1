@@ -18,22 +18,21 @@ export class UserEntity extends TimeStamps implements User {
     super();
 
     this.email = data.email;
-    this.avatarPath = data.avatarPath;
-    this.firstname = data.firstname;
-    this.lastname = data.lastname;
+    this.avatarUrl = data.avatarUrl;
+    this.name = data.name;
   }
 
   @prop({ unique: true, required: true })
   public email!: string;
 
   @prop({required: true, default: ''})
-  public avatarPath!: string;
+  public avatarUrl!: string;
 
   @prop({required: true, default: ''})
-  public firstname!: string;
+  public name!: string;
 
-  @prop({required: true, default: ''})
-  public lastname!: string;
+  @prop({required: true, default: false})
+  public isPro!: boolean;
 
   @prop({required: true, default: ''})
   private password!: string;

@@ -26,10 +26,6 @@ export default class OfferDto {
   @Expose()
   public commentCount!: number;
 
-  // @Expose()
-  // @Type(() => CategoryDto)
-  // public categories!: CategoryDto[];
-
   @Expose({ name: 'userId'})
   @Type(() => UserDto)
   public user!: UserDto;

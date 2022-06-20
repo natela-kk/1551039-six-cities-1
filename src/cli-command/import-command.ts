@@ -33,7 +33,6 @@ export default class ImportCommand implements CliCommandInterface {
     this.offerService = new OfferService(this.logger, OfferModel);
     this.userService = new UserService(this.logger, UserModel);
     this.databaseService = new DatabaseService(this.logger);
-    console.log('IMPOOOOOOOOOOOOOORT');
   }
 
   private async saveOffer(offer: Offer) {

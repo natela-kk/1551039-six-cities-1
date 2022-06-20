@@ -54,10 +54,7 @@ export default class UserController extends Controller {
     { body }: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>,
     res: Response,
   ): Promise<void> {
-    console.log('body 57');
-    console.log(body);
     const existsUser = await this.userService.findByEmail(body.email);
-    console.log(existsUser);
     if (existsUser) {
       throw new HttpError(
         StatusCodes.CONFLICT,
@@ -74,8 +71,6 @@ export default class UserController extends Controller {
     {body}: Request<Record<string, unknown>, Record<string, unknown>, LoginUserDto>,
     _res: Response,
   ): Promise<void> {
-    console.log('body 76');
-    console.log(body);
     const existsUser = await this.userService.findByEmail(body.email);
 
     if(!existsUser) {

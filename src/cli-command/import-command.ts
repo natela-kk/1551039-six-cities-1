@@ -37,7 +37,7 @@ export default class ImportCommand implements CliCommandInterface {
 
   private async saveOffer(offer: Offer) {
     const user = await this.userService.findOrCreate({
-      ...offer.user,
+      ...offer.host,
       password: DEFAULT_USER_PASSWORD,
     }, this.salt);
 

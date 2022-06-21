@@ -21,7 +21,7 @@ export default class ConfigService implements ConfigInterface {
     }
 
     configSchema.load({});
-    configSchema.validate({allowed: 'strict',output: this.logger.info});
+    configSchema.validate({allowed: 'strict', output: this.logger.info});
 
     this.config = configSchema.getProperties();
     this.logger.info('.env file found and successfully parsed!');

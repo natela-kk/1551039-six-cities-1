@@ -1,11 +1,10 @@
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import crypto from 'crypto';
-import { Offer } from '../types/offer.type';
+import { Offer } from '../types/offer.type.js';
 
 export const createOffer = (row: string) => {
   const tokens = row.replace('\n', '').split('\t');
   const [cityName, name, password, email, avatarUrl, title, description, previewImage, images, type, rating, maxAdults, id, goods, bedrooms, latitude, longitude, isFavorite, isPremium, isPro, date, commentsCount, price] = tokens;
-  console.log(images);
   return {
     bedrooms: Number.parseInt(bedrooms, 10),
     city: {

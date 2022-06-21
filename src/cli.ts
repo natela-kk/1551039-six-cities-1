@@ -11,5 +11,4 @@ app.registerCommands([
   new HelpCommand, new VersionCommand,
   new ImportCommand, new GenerateCommand
 ]);
-console.log(process.argv);
 app.processCommand(process.argv);

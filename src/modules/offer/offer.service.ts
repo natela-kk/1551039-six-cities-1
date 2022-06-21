@@ -5,6 +5,7 @@ import {DocumentType, ModelType} from '@typegoose/typegoose/lib/types.js';
 import {OfferEntity} from './offer.entity.js';
 import {Component} from '../../types/component.types.js';
 import {LoggerInterface} from '../../common/logger/logger.interface.js';
+import UpdateOfferDto from './dto/update-offer.dto.js';
 
 @injectable()
 export default class OfferService implements OfferServiceInterface {
@@ -30,13 +31,20 @@ export default class OfferService implements OfferServiceInterface {
   public async find(): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
       .find()
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
   }
 
   public async deleteById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndDelete(offerId)
+      .exec();
+  }
+
+  public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
+    return this.offerModel
+      .findByIdAndUpdate(offerId, dto, {new: true})
+      .populate(['userId'])
       .exec();
   }
 }

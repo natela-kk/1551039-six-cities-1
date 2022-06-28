@@ -15,12 +15,14 @@ import HttpError from '../../common/errors/http-error.js';
 import { StatusCodes } from 'http-status-codes';
 import CreateFavoriteDto from './dto/create-favorite.dto.js';
 import OfferDto from '../offer/dto/offer.dto.js';
+import { OfferServiceInterface } from '../offer/offer-service.interface.js';
 
 
 export default class FavoriteController extends Controller {
   constructor(
     @inject(Component.LoggerInterface) logger: LoggerInterface,
     @inject(Component.FavoriteServiceInterface) private readonly favoriteService: FavoriteServiceInterface,
+    @inject(Component.OfferServiceInterface) private readonly offerService: OfferServiceInterface,
   ) {
     super(logger);
 
@@ -29,7 +31,7 @@ export default class FavoriteController extends Controller {
     this.addRoute({
       path: '/',
       method: HttpMethod.Get,
-      handler: this.index,
+      handler: this.getFavorites,
       middlewares: [
         new PrivateRouteMiddleware()
       ]
@@ -56,11 +58,11 @@ export default class FavoriteController extends Controller {
     });
   }
 
-  public async index(_req: Request, res: Response): Promise<void> {
-    const result = await this.favoriteService.findByUserId(_req.user.id);
+  // public async index(_req: Request, res: Response): Promise<void> {
+  //   const result = await this.favoriteService.findByUserId(_req.user.id);
 
-    this.ok(res, fillDTO(OfferDto, result));
-  }
+  //   this.ok(res, fillDTO(OfferDto, result));
+  // }
 
   public async create(req: Request<Record<string, string>, Record<string, unknown>, CreateFavoriteDto>,
     res: Response): Promise<void> {
@@ -84,5 +86,11 @@ export default class FavoriteController extends Controller {
     await this.favoriteService.deleteById(params['favoriteId']);
 
     this.noContent(res);
+  }
+
+  public async getFavorites({ user: { id } }: Request, res: Response): Promise<void> {
+    const offers = await this.offerService.findFavorites(id);
+
+    this.ok(res, fillDTO(OfferDto, offers));
   }
 }

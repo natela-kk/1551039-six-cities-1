@@ -5,6 +5,9 @@ export default class OfferDto {
   public price!: number;
 
   @Expose()
+  public favoritesSize!: number;
+
+  @Expose()
   public title!: string;
 
   @Expose()

@@ -25,51 +25,6 @@ export default class FavoriteService implements FavoriteServiceInterface {
     return this.favoriteModel.findByIdAndDelete(id);
   }
 
-  public async findByUserId(id: string): Promise<DocumentType<FavoriteEntity>[]> {
-    return this.favoriteModel.aggregate([
-      {
-        $match: {
-          $expr: {
-            $eq: [ { $toString: '$userId' }, id ],
-          }
-        },
-      },
-      {
-        $addFields: {
-          price:'',
-        }
-      },
-      {
-        $lookup: {
-          from: 'offers',
-          localField: 'price',
-          foreignField: 'price',
-          as: 'price'
-        //   let: {offerId: '$_id', userId: id},
-        //   pipeline: [
-        //     {
-        //       $addFields: {
-        //         // name: { $toString: '$_id' },
-        //         price: { $toString: 'hi'},
-        //         // title: { $toString: '$_id'},
-        //         // type: { $toString: '$_id'},
-        //         // isFavorite: { $toString: '$_id'},
-        //         // date: { $toString: '$_id'},
-        //         // city: { $toString: '$_id'},
-        //         // previewImage: { $toString: '$_id'},
-        //         // isPremium: { $toString: '$_id'},
-        //         // rating: { $toString: '$_id'},
-        //         // commentCount: { $toString: '$_id'},
-        //         // isFavorite: { $gt: [{ $size: '$favorites' }, 0 ]}
-        //       },
-        },
-        //   ],
-        //   as: 'offers'
-        // }
-      }
-    ]).exec();
-  }
-
   public async isAdded(offerId: string, userId: string): Promise<boolean> {
     return (await this.favoriteModel.exists({offerId, userId}) !== null);
   }

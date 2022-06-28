@@ -16,6 +16,7 @@ import {ValidateDtoMiddleware} from '../../common/middlewares/validate-dto.middl
 import {CommentServiceInterface} from '../comment/comment-service.interface.js';
 import CommentDto from '../comment/dto/comment.dto.js';
 import {DocumentExistsMiddleware} from '../../common/middlewares/document-exists.middleware.js';
+import { RequestQuery } from '../../types/request-query.type.js';
 
 type ParamsGetOffer = {
   offerId: string;
@@ -95,10 +96,17 @@ export default class OfferController extends Controller {
     this.ok(res, fillDTO(OfferDetailsDto, offer));
   }
 
-  public async index(_req: Request, res: Response): Promise<void> {
-    console.log(_req.user.id);
-    const result = await this.offerService.find(_req.user?.id || '');
-    this.ok(res, fillDTO(OfferDto, result));
+  // public async index(_req: Request, res: Response): Promise<void> {
+  //   console.log(_req.user.id);
+  //   const result = await this.offerService.find(_req.user?.id || '');
+  //   this.ok(res, fillDTO(OfferDto, result));
+  // }
+
+  public async index(
+    { query, user }: Request<core.ParamsDictionary, unknown, unknown, RequestQuery>,
+    res: Response): Promise<void> {
+    const offers = await this.offerService.find(user?.id, query.limit);
+    this.ok(res, fillDTO(OfferDto, offers));
   }
 
   public async create(

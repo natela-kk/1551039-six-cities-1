@@ -11,7 +11,6 @@ export type MockData = {
   goods: string[];
   latitudes: string[];
   longitudes: string[];
-  isFavorite: string[];
   isPremium: string[];
   isPro: string[];
 }

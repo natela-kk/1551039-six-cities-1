@@ -1,32 +1,39 @@
-import {Expose, Type} from 'class-transformer';
-import UserDto from '../../user/dto/user.dto.js';
+import { Expose } from 'class-transformer';
 
 export default class OfferDto {
   @Expose()
-  public id!: string;
+  public price!: number;
 
   @Expose()
   public title!: string;
 
   @Expose()
-  public description!: string;
-
-  @Expose()
-  public image!: string;
-
-  @Expose()
-  public postDate!: string;
-
-  @Expose()
-  public price!: number;
-
-  @Expose()
   public type!: string;
 
   @Expose()
-  public commentCount!: number;
+  public isFavorite!: boolean;
 
-  @Expose({ name: 'userId'})
-  @Type(() => UserDto)
-  public user!: UserDto;
+  @Expose()
+  public date!: string;
+
+  @Expose()
+  public city!: {
+    location: {
+      latitude: number
+      longitude: number
+    }
+    name: string
+  };
+
+  @Expose()
+  public previewImage!: string;
+
+  @Expose()
+  public isPremium!: boolean;
+
+  @Expose()
+  public rating!: number;
+
+  @Expose()
+  public commentCount!: number;
 }

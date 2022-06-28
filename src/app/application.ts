@@ -9,6 +9,7 @@ import express, { Express } from 'express';
 import { ExceptionFilterInterface } from '../common/errors/exception-filter.interface.js';
 import UserController from '../modules/user/user.controller.js';
 import { ControllerInterface } from '../common/controller/controller.interface.js';
+import {AuthenticateMiddleware} from '../common/middlewares/authenticate.middleware.js';
 
 @injectable()
 export default class Application {
@@ -20,7 +21,9 @@ export default class Application {
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
     @inject(Component.ExeptionFilterInterface) private exeptionFilter: ExceptionFilterInterface,
     @inject(Component.UserController) private userController: UserController,
-    @inject(Component.OfferController) private offerController: ControllerInterface
+    @inject(Component.OfferController) private offerController: ControllerInterface,
+    @inject(Component.CommentController) private commentController: ControllerInterface,
+    @inject(Component.FavoriteController) private favoriteController: ControllerInterface
   ) {
     this.expressApp = express();
   }
@@ -28,6 +31,8 @@ export default class Application {
   public registerRoutes() {
     this.expressApp.use('/users', this.userController.router);
     this.expressApp.use('/offers', this.offerController.router);
+    this.expressApp.use('/comments', this.commentController.router);
+    this.expressApp.use('/favorites', this.favoriteController.router);
   }
 
   public registerMiddlewares() {
@@ -36,6 +41,9 @@ export default class Application {
       '/upload',
       express.static(this.config.get('UPLOAD_DIRECTORY'))
     );
+
+    const authenticateMiddleware = new AuthenticateMiddleware(this.config.get('JWT_SECRET'));
+    this.expressApp.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
   }
 
   public registerExeptionFilters() {

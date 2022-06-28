@@ -46,7 +46,6 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const bedrooms = generateRandomValue(MIN_BEDROOMS, MAX_BEDROOMS).toString();
     const latitudes = getRandomItem<string>(this.mockData.latitudes);
     const longitudes = getRandomItem<string>(this.mockData.longitudes);
-    const isFavorite = getRandomItem<string>(this.mockData.isFavorite);
     const isPremium = getRandomItem<string>(this.mockData.isPremium);
     const isPro = getRandomItem<string>(this.mockData.isPro);
     const createdDate =  dayjs().subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
@@ -57,8 +56,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
       city, user, password, email,
       avatar, title, description,
       previewImage, images, type, rating, maxAdults,
-      id, goods, bedrooms, latitudes, longitudes,
-      isFavorite, isPremium, isPro,
+      id, goods, bedrooms, latitudes, longitudes, isPremium, isPro,
       createdDate, commentsCounts, price
     ].join('\t');
   }

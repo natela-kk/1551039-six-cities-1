@@ -27,6 +27,7 @@ export default class ExceptionFilter implements ExceptionFilterInterface {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json(createErrorObject(error.message));
+    next();
   }
 
   public catch(error: Error | HttpError, req: Request, res: Response, next: NextFunction): void {
